@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\User;
 use Illuminate\Http\Request;
 
+
+
 class UsersController extends Controller
 {
 
@@ -39,11 +41,13 @@ class UsersController extends Controller
 
 
 //===== funcion para loguaer los usuarios ============//
-    public function login($rut,$clave, Request $request){
+    public function login(Request $request){
 
-     $user = User::where('rut','=',$rut)
-                  ->where('clave','=',md5($clave))
+     $user = User::where('rut','=',$request->post('rut'))
+                  ->where('clave','=',md5($request->post('clave')))
                   ->get();
+
+
     if($user){
      foreach ($user as $us) {
        $id = $us->id;
@@ -59,8 +63,8 @@ class UsersController extends Controller
 
 
 //===== funcion para cerrar la sesion ============//
-   public function logout($token, Request $request){
-    $user = User::where('token','=',$token)
+   public function logout(Request $request){
+    $user = User::where('token','=',$request->get('token'))
                   ->get();
 
   if($user){
@@ -89,4 +93,24 @@ public function cambiarClave($id, $clave, Request $request){
    }
 
 }
+
+  //========== funcion para obtener un usuario por su id ======================//
+    public function getuserId($id)
+    {
+        $user = User::find($id);
+        if ($user) {
+            return (array(
+                'response' => $user,
+                'estatus' => 'OK',
+                'code' => 200
+            ));
+        } else {
+            return (array(
+                'response' => 'fail',
+                'estatus' => 'OK',
+                'code' => 404
+            ));
+        }
+    }
+
 }

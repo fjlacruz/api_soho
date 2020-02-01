@@ -13,11 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
-//========================== Ruta del modulo de Usuarios =============================//
+
+Route::group(['middleware' => ['cors']], function () {
 Route::get('usuarios', 'UsersController@getUsers')->name('getUsers');
+Route::get('usuarios/{id}', 'UsersController@getuserId')->name('getuserId');
 Route::post('usuarios', 'UsersController@addUser')->name('addUser');
-Route::get('login/{rut}/{clave}', 'UsersController@login')->name('login');
-Route::get('logout/{token}', 'UsersController@logout')->name('logout');
+Route::post('login/', 'UsersController@login')->name('login');
+Route::post('logout/', 'UsersController@logout')->name('logout');
 Route::post('cambiar-clave/{id}/{clave}', 'UsersController@cambiarClave')->name('cambiarClave');
 
 
@@ -27,7 +29,5 @@ Route::post('zapatos', 'ZapatosController@add')->name('add');
 Route::get('zapatos/{id}', 'ZapatosController@getZapato')->name('getZapato');
 Route::post('zapatos/{id}', 'ZapatosController@editZapato')->name('editZapato');
 Route::get('zapatos/delete/{id}', 'ZapatosController@deleteZapato')->name('deleteZapato');
-
-
-
+});
 
