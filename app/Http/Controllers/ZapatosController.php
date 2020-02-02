@@ -69,6 +69,7 @@ class ZapatosController extends Controller
     public function editZapato($id, Request $request)
     {
         $zapato = Zapato::find($id);
+
         $zapato->fill($request->all())->save();
         if ($zapato) {
             return (array(

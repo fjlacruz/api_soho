@@ -20,7 +20,7 @@ Route::get('usuarios/{id}', 'UsersController@getuserId')->name('getuserId');
 Route::post('usuarios', 'UsersController@addUser')->name('addUser');
 Route::post('login/', 'UsersController@login')->name('login');
 Route::post('logout/', 'UsersController@logout')->name('logout');
-Route::post('cambiar-clave/{id}/{clave}', 'UsersController@cambiarClave')->name('cambiarClave');
+Route::post('cambiar-clave/{id}', 'UsersController@cambiarClave')->name('cambiarClave');
 
 
 //========================== Ruta del modulo de Zapatos =============================//

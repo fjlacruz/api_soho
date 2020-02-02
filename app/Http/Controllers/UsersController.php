@@ -82,10 +82,10 @@ class UsersController extends Controller
   }
 
 //===== funcion para cambiar la clave de usuario ============//
-public function cambiarClave($id, $clave, Request $request){
+public function cambiarClave($id,Request $request){
     $user = User::find($id);
 
-    $up = User::find($id)->update(['clave' => md5($clave)]);
+    $up = User::find($id)->update(['clave' => md5($request->get('confirmarClave'))]);
     if($up){
      return (array('response' => 'success', 'estatus' => 'OK', 'code' => 200));
     }else{
